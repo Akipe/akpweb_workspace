@@ -2,7 +2,7 @@ WHAT_OPERATING_SYSTEM 	:= $(shell uname -s)
 COMMAND 				:= bash
 
 .PHONY: build run stop clean shell docker-build docker-run docker-stop docker-pull help
-.DEFAULT_GOAL= helpmake bui
+.DEFAULT_GOAL= helpmake build
 
 dependencies-install-archlinux: 
 	sudo pacman --needed -Sy \
@@ -18,24 +18,35 @@ run: system-docker-run docker-run ## Start development environment
 stop: docker-stop system-docker-stop ## Stop development environment
 
 init: git-submodules-fetch-current build
-	mkdir \
-		./docker/_cache/composer \
-		./docker/_cache/symfony
+	mkdir -p \
+		./docker/var/log \
+		./docker/var/cache/composer \
+		./docker/varcache/symfony
 	chmod 777 \
-		./docker/_cache/composer \
-		./docker/_cache/symfony
+		./docker/var/log \
+		./docker/var/cache/composer \
+		./docker/var/cache/symfony
 
 update: docker-pull docker-restart gpm-update
 
 clean:  ## Clear all caches
 	rm -R \
-		./docker/_cache/composer/* \
-		./docker/_cache/composer/.* \
-		./docker/_cache/symfony/.*
+		./docker/var/cache/composer/* \
+		./docker/var/cache/composer/.* \
+		./docker/var/cache/symfony/* \
+		./docker/var/cache/symfony/.*
 
 shell: ## Execute command from PHP container with 
-	sudo docker exec -it --user 1000:1000 akpweb_php-cli_dev $(COMMAND)
+	sudo docker exec -it --user 1000:1000 akpweb_php_cli_dev $(COMMAND)
 
+shell-nginx:
+	sudo docker exec -it --user 1000:1000 akpweb_nginx_dev $(COMMAND)
+
+shell-php-fpm:
+	sudo docker exec -it --user 1000:1000 akpweb_php_fpm_dev $(COMMAND)
+
+shell-nodejs-tool:
+	sudo docker exec -it --user 1000:1000 akpweb_nodejs_tools_dev $(COMMAND)
 
 system-docker-run: ## Execute Docker (Only on Linux)
 ifeq ($(WHAT_OPERATING_SYSTEM), Linux)
@@ -62,19 +73,10 @@ docker-pull:
 docker-restart: docker-stop docker-run
 
 composer-install:
-	sudo docker exec -it --user 1000:1000 akpweb_php-cli_dev composer install
+	sudo docker exec -it --user 1000:1000 akpweb_php_cli_dev composer install
 
 composer-update:
-	sudo docker exec -it --user 1000:1000 akpweb_php-cli_dev composer update
-
-gpm:
-	sudo docker exec -it --user 1000:1000 akpweb_php-cli_dev bin/gpm $(COM)
-
-gpm-update:
-	sudo docker exec -it --user 1000:1000 akpweb_php-cli_dev bin/gpm selfupgrade -f
-
-gpm-install:
-	sudo docker exec -it --user 1000:1000 akpweb_php-cli_dev bin/gpm install $(WHAT)
+	sudo docker exec -it --user 1000:1000 akpweb_php_cli_dev composer update
 
 git-submodules-fetch-current:
 	git submodule update --init --recursive

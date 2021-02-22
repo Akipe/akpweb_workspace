@@ -1,18 +1,14 @@
-FROM ubuntu:20.04
+FROM node:15.9
+
+ENV NODE_ENV=production
 
 MAINTAINER Akipe
 
 WORKDIR /opt
 
-RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
-        build-essential \
-        npm \
-        nodejs \
-    && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN npm install --production -g gulp
 
-RUN /usr/bin/npm install -g gulp
-
-RUN /usr/bin/npm install -g bower
+RUN npm install --production -g bower
 
 VOLUME ["/opt"]
 CMD ["gulp", "watch"]

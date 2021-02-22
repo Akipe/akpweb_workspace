@@ -4,21 +4,6 @@ networks:
   akpweb_dev:
 
 services:
-  akpweb_php-cli:
-    container_name: akpweb_php-cli_dev
-    build:
-      context: ./php-cli
-    user: "1000:1000"
-    tty: true
-    working_dir: /var/www/akpweb
-    volumes:
-      - ../app:/var/www/akpweb
-      - ../theme:/var/www/akpweb/user/themes/akpview
-      - ./_cache/composer:/.composer/cache
-      - ./_cache/symfony:/.symfony/cache
-    networks:
-      - akpweb_dev
-
   akpweb_nginx:
     container_name: akpweb_nginx_dev
     build:
@@ -27,32 +12,47 @@ services:
       - "8080:80"
     tty: true
     volumes:
-      - ../app:/var/www/akpweb:ro
-      - ../theme:/var/www/akpweb/user/themes/akpview:ro
+      - ./../app:/var/www/akpweb:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./var/log/nginx:/var/log/nginx/
     networks:
       - akpweb_dev
 
-  akpweb_php-fpm:
-    container_name: akpweb_php-fpm_dev
+  akpweb_php_cli:
+    container_name: akpweb_php_cli_dev
+    build:
+      context: ./php-cli
+    user: "1000:1000"
+    tty: true
+    working_dir: /var/www/akpweb
+    volumes:
+      - ./../app:/var/www/akpweb
+      - ./var/cache/composer:/.composer/cache
+      - ./var/cache/symfony:/.symfony/cache
+      - ./php-cli/conf/php.development.ini:/usr/local/etc/php/php.ini:ro
+    networks:
+      - akpweb_dev
+
+  akpweb_php_fpm:
+    container_name: akpweb_php_fpm_dev
     build:
       context: ./php-fpm
     user: "1000:1000"
     tty: true
     volumes:
-      - ../app:/var/www/akpweb
-      - ../theme:/var/www/akpweb/user/themes/akpview
+      - ./../app:/var/www/akpweb
+      - ./php-fpm/conf/php-fpm.d/akpweb.conf:/usr/local/etc/php-fpm.d/akpweb.conf:ro
+      - ./php-fpm/conf/php.development.ini:/usr/local/etc/php/php.ini:ro
     networks:
       - akpweb_dev
 
-  akpweb_nodejs-tools:
-    container_name: akpweb_nodejs-tools_dev
+  akpweb_nodejs_tools:
+    container_name: akpweb_nodejs_tools_dev
     build:
       context: ./nodejs-tools
     user: "1000:1000"
     tty: true
     volumes:
-      - ../app:/opt
-      - ../theme:/opt/user/themes/akpview
+      - ./../app:/opt
     networks:
       - akpweb_dev
