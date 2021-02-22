@@ -37,16 +37,16 @@ clean:  ## Clear all caches
 		./docker/var/cache/symfony/.*
 
 shell: ## Execute command from PHP container with 
-	sudo docker exec -it --user 1000:1000 akpweb_php_cli_dev $(COMMAND)
+	sudo docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev $(COMMAND)
 
 shell-nginx:
-	sudo docker exec -it --user 1000:1000 akpweb_nginx_dev $(COMMAND)
+	sudo docker exec --interactive --tty --user 1000:1000 akpweb_nginx_dev $(COMMAND)
 
 shell-php-fpm:
-	sudo docker exec -it --user 1000:1000 akpweb_php_fpm_dev $(COMMAND)
+	sudo docker exec --interactive --tty --user 1000:1000 akpweb_php_fpm_dev $(COMMAND)
 
 shell-nodejs-tool:
-	sudo docker exec -it --user 1000:1000 akpweb_nodejs_tools_dev $(COMMAND)
+	sudo docker exec --interactive --tty --user 1000:1000 akpweb_nodejs_tools_dev $(COMMAND)
 
 system-docker-run: ## Execute Docker (Only on Linux)
 ifeq ($(WHAT_OPERATING_SYSTEM), Linux)
@@ -73,10 +73,10 @@ docker-pull:
 docker-restart: docker-stop docker-run
 
 composer-install:
-	sudo docker exec -it --user 1000:1000 akpweb_php_cli_dev composer install
+	sudo docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev composer install
 
 composer-update:
-	sudo docker exec -it --user 1000:1000 akpweb_php_cli_dev composer update
+	sudo docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev composer update
 
 git-submodules-fetch-current:
 	git submodule update --init --recursive
