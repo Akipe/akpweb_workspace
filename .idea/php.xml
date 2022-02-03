@@ -135,7 +135,13 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/amqp-messenger" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/redis-messenger" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/webpack-encore-bundle" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/doctrine-messenger" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/messenger" />
+      <path value="$PROJECT_DIR$/app/vendor/phpstan/phpdoc-parser" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
 </project>
