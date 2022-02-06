@@ -1,14 +1,11 @@
 FROM node:17
 
-ENV NODE_ENV=production
-
 MAINTAINER Akipe
+
+ADD start.sh /
+RUN chmod +x /start.sh
 
 WORKDIR /opt
 
-RUN npm install --production -g gulp
-
-RUN npm install --production -g bower
-
 VOLUME ["/opt"]
-CMD ["gulp", "watch"]
+CMD ["/start.sh"]

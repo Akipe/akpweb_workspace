@@ -56,6 +56,8 @@ services:
     container_name: akpweb_nodejs_tools_dev
     build:
       context: ./nodejs-tools
+    environment:
+      - NODE_ENV=development
     user: "1000:1000"
     tty: true
     volumes:
