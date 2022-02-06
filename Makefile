@@ -118,6 +118,38 @@ sf-check-security:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
     	symfony check:security
 
+sf-debug-router:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console debug:router
+
+sf-debug-dotenv:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console debug:dotenv
+
+sf-doctrine-database-create:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console doctrine:database:create
+
+sf-doctrine-migrate:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console doctrine:migrations:migrate
+
+sf-make-entity:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console make:entity
+
+sf-make-entity-regenerate:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console make:entity --regenerate
+
+sf-check-migration:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console make:migration
+
+sf-make-controller:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console make:controller
+
 
 ### Commands for preparing host system
 
