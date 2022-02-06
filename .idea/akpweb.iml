@@ -37,7 +37,6 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/doctrine/persistence" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/doctrine/doctrine-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/app/vendor/easycorp/easyadmin-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/sebastian/type" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/sebastian/cli-parser" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/sebastian/object-reflector" />
@@ -93,7 +92,6 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/security-http" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/dependency-injection" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/twig-bridge" />
-      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/uid" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-intl-idn" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/monolog-bridge" />
@@ -121,7 +119,6 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/notifier" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/asset" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/yaml" />
-      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-uuid" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/security-core" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/framework-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-php80" />
@@ -145,6 +142,8 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/doctrine-messenger" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/messenger" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/phpstan/phpdoc-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/squizlabs/php_codesniffer" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/escapestudios/symfony2-coding-standard" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
