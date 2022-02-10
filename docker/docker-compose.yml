@@ -29,7 +29,7 @@ services:
       - ./../app:/var/www/akpweb
       - ./var/cache/composer:/.composer/cache
       - ./var/cache/symfony:/.symfony/cache
-      - ./php-cli/conf/php.development.ini:/usr/local/etc/php/php.ini:ro
+      - ./php/conf/php.development.ini:/usr/local/etc/php/php.ini:ro
     networks:
       - akpweb_dev
     extra_hosts:
@@ -43,10 +43,10 @@ services:
     tty: true
     volumes:
       - ./../app:/var/www/akpweb
-      - ./php-fpm/conf/php-fpm.d/akpweb.conf:/usr/local/etc/php-fpm.d/akpweb.conf:ro
-      - ./php-fpm/conf/php.development.ini:/usr/local/etc/php/php.ini:ro
-      - ./php-fpm/conf/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:ro
-      - ./php-fpm/conf/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini:ro
+      - ./php/conf/php.development.ini:/usr/local/etc/php/php.ini:ro
+      - ./php/conf/fpm.d/akpweb.conf:/usr/local/etc/php-fpm.d/akpweb.conf:ro
+      - ./php/conf/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:ro
+      - ./php/conf/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini:ro
     networks:
       - akpweb_dev
     extra_hosts:
