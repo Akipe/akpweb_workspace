@@ -1,4 +1,4 @@
-FROM php:8.1.1-cli
+FROM php:8.1-cli
 
 # xdebug
 RUN pecl install xdebug \
