@@ -15,7 +15,7 @@ start: docker-start containers-start ## Start development environment
 
 stop: containers-stop docker-stop ## Stop development environment
 
-update: containers-pull containers-restart
+update: containers-pull containers-build containers-restart
 
 clean: clean-containers-cache
 
@@ -106,6 +106,14 @@ composer-update:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		composer update
 
+npm-install:
+	docker exec --interactive --tty --user 1000:1000 akpweb_nodejs_tools_dev \
+		npm install
+
+npm-update:
+	docker exec --interactive --tty --user 1000:1000 akpweb_nodejs_tools_dev \
+		npm update
+
 sf-check-requirements:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		symfony check:requirements
@@ -130,9 +138,13 @@ sf-doctrine-database-create:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console doctrine:database:create
 
-sf-doctrine-migrate:
+sf-doctrine-migrate-database:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console doctrine:migrations:migrate
+
+sf-doctrine-migrations-reset:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console doctrine:migrations:migrate first -n
 
 sf-make-entity:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
@@ -142,7 +154,7 @@ sf-make-entity-regenerate:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console make:entity --regenerate
 
-sf-check-migration:
+sf-make-migration:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console make:migration
 
@@ -150,6 +162,9 @@ sf-make-controller:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console make:controller
 
+sf-assets-compile:
+	docker exec --interactive --tty --user 1000:1000 akpweb_nodejs_tools_dev \
+		npm run watch
 
 ### Commands for preparing host system
 
