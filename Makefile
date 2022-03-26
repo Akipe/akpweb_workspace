@@ -138,7 +138,11 @@ sf-doctrine-database-create:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console doctrine:database:create
 
-sf-doctrine-migrate-database:
+sf-doctrine-migration-create:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console make:migration
+
+sf-doctrine-migration-execute:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console doctrine:migrations:migrate
 
@@ -154,13 +158,17 @@ sf-make-entity-regenerate:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console make:entity --regenerate
 
-sf-make-migration:
-	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
-		php bin/console make:migration
-
 sf-make-controller:
 	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
 		php bin/console make:controller
+
+sf-show-cache:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console cache:pool:list
+
+sf-clear-cache:
+	docker exec --interactive --tty --user 1000:1000 akpweb_php_cli_dev \
+		php bin/console cache:pool:clear cache.global_clearer
 
 sf-assets-compile:
 	docker exec --interactive --tty --user 1000:1000 akpweb_nodejs_tools_dev \
