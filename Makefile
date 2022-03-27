@@ -7,7 +7,7 @@ COMMAND 				:= bash
 
 ### General commands
 
-init: git-submodules-fetch-current build containers-create-mount-directories
+init: git-submodules-fetch-current build containers-create-mount-directories prepare-ssl-dev
 
 build: docker-start containers-pull containers-build ## Prepare and start development environment and install php libraries
 
@@ -76,6 +76,24 @@ containers-create-mount-directories:
 		./docker/var/cache/composer \
 		./docker/var/cache/symfony
 
+
+### HTTPs certificates
+
+create-ssl-dev-private-key:
+	openssl ecparam \
+		-genkey \
+		-name secp384r1 \
+		| openssl ec -out ./docker/nginx/ssl/akpweb_dev.key
+
+create-ssl-dev-certificate:
+	openssl req \
+		-x509 \
+		-nodes \
+		-days 3650 \
+		-key ./docker/nginx/ssl/akpweb_dev.key \
+		-out ./docker/nginx/ssl/akpweb_dev.crt
+
+prepare-ssl-dev: create-ssl-dev-private-key create-ssl-dev-certificate
 
 ### Clean
 
